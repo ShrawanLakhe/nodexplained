@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+// require('./route')(app);
+
 app.use(express.static('public'))
 
 app.get('/', (req, res) => {
@@ -63,8 +65,3 @@ app.get('/*', (req, res) => {
 app.listen(3000, ()=>{
 	console.log('server listening on port 3000');
 });
-
-
-// require('./route')(app);
-//
-// // app.use('/', routes)
