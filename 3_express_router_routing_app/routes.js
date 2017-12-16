@@ -4,11 +4,11 @@
 const express = require('express');
 const router = express.Router();
 
-router.get('/', function (req, res) {
+router.get('/', (req, res) => {
     res.send('This is home page')
 });
 
-router.get('/about-me', function (req, res) {
+router.get('/about-me', (req, res) => {
     res.send('This is About me page')
 });
 
@@ -33,7 +33,7 @@ router.route('/blogs')
         res.send("Deleting blog article");
     });
 
-router.get('/course', function (req, res) {
+router.get('/course', (req, res) => {
     res.send('<h1>Creating a course articles</h1>')
 });
 

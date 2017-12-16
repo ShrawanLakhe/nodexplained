@@ -1,13 +1,15 @@
 {
-  "name": "hello_world",
+  "name": "express_router",
   "version": "1.0.0",
-  "description": "A Hello world application",
+  "description": "An express basic router application",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/nodemon server.js"
   },
   "keywords": [
-    "hello_world",
+    "express-routes",
+    "routing",
     "node.js",
     "express.js"
   ],
@@ -15,5 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.13.2"
   }
 }
