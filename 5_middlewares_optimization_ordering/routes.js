@@ -4,6 +4,13 @@
 
 const express = require('express');
 const router = express.Router();
+const bodyParser = require('body-parser');
+
+// create application/json parser
+const jsonParser = bodyParser.json();
+
+// create application/x-www-form-urlencoded parser
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 const authorizeClient = (req, res, next) => {
     console.log(req.query.role);
@@ -39,13 +46,25 @@ router.route('/courses')
             course_description: 'This course will cover all related to the Node.js'
         });
     })
-    .post(authorizeClient, (req, res) => {
+    .post(jsonParser, authorizeClient, (req, res) => {
         console.log(req.body);
         res.json({
             message: "course saved successfully",
             data: {
                 course_name: req.body.course_name,
                 course_description: req.body.course_description
+            }
+        });
+    });
+
+
+router.post('/books', urlencodedParser, authorizeClient, (req, res) => {
+        console.log(req.body);
+        res.json({
+            message: "book saved successfully",
+            data: {
+                book_name: req.body.book_name,
+                book_description: req.body.book_description
             }
         });
     });

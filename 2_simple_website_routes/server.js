@@ -56,11 +56,9 @@ app.get('/contact-me', (req, res) => {
 	res.send(`This is contact me page. I live in  ${req.query.address}`);
 });
 
-
-app.get('/*', (req, res) => {
-	res.send("404 not found");
-});
-
+// app.get('/*', (req, res) => {
+// 	res.send("404 not found");
+// });
 
 app.listen(3000, ()=>{
 	console.log('server listening on port 3000');
