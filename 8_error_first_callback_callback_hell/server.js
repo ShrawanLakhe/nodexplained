@@ -26,22 +26,61 @@ app.get('/', (req, res) => {
     }
 });
 
-checkFileExists((err) => {
-    seeFilePermissions((err) => {
-        readFile((err)=> {
-            appendFile((err) => {
-                readFile((err) => {
-                    writeFile((err) => {
-                        removeOriginalFile((err) =>{
 
-                        })
-                    })
-                })
-            })
-        })
 
-    })
-})
+app.get('/callback-hell', (req, res) => {
+    const filePath = './NTB_Nepal-Travel-Tips.pdf';
+    const newFilePath = './new.txt';
+    fs.open(newFilePath, 'wx', (err, fd) => {
+        if (err) {
+            throw err;
+        } else {
+            console.log('--------')
+            fs.readFile(filePath, (err, data) => {
+                if (err) {
+                    throw err;
+                } else{
+                    fs.appendFile(filePath, 'data to append', (err) => {
+                        if (err) {
+                            console.log('err', err);
+                            throw err;
+                        } else{
+                            fs.writeFile(newFilePath, data, (err) => {
+                                if (err) {
+                                    throw err;
+                                } else{
+                                    console.log("done")
+                                    res.send('done');
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
+
+
+
+
+
+// checkFileExists((err) => {
+//     seeFilePermissions((err) => {
+//         readFile((err)=> {
+//             appendFile((err) => {
+//                 readFile((err) => {
+//                     writeFile((err) => {
+//                         removeOriginalFile((err) =>{
+//
+//                         })
+//                     })
+//                 })
+//             })
+//         })
+//
+//     })
+// })
 
 
 app.listen(3000, ()=>{
