@@ -5,82 +5,52 @@
 const express = require('express');
 const app = express();
 const fs = require('fs');
+const util = require('util');
+const Promise = require('bluebird');
+const fileSystem = Promise.promisifyAll(require('fs'));
+const readFileAsyncSingle = Promise.promisify(require("fs").readFile);
+const readFile1 = util.promisify(fs.readFile);
 
-app.get('/', (req, res) => {
-    try {
-        fs.readFile('./light-Travel-Tips.pdf', (err, data) => {
-            console.log('============================================');
-            console.log('For file name - light-Travel-Tips.pdf which doesn\'t exists in the specified in the folder')
-            console.log('============================================');
+console.log('fileSystem promisified apis', fileSystem)
+
+fileSystem.readFileAsync('./NTB_Nepal-Travel-Tips.pdf')
+    .then((content) => {
+        console.log('reading a file content ...')
+        console.log(content)
+    })
+
+
+readFileAsyncSingle('./NTB_Nepal-Travel-Tips.pdf')
+    .then((content) => {
+        console.log('reading a file content of single promisified method ...')
+        console.log(content)
+    })
+
+
+const readFile = () => {
+    return new Promise((resolve, reject) => {
+        fs.readFile('./NTB_Nepal-Travel-Tips.pdf', (err, data) => {
             if (err) {
-                console.log('err', err);
-                throw err;
+                reject(err);
             } else{
-                console.log('data', data);
-                res.send(data);
+                resolve(data);
             }
         });
-    } catch (err) {
-        // This will not catch the throw!
-        console.error(err);
-    }
-});
+    })
+}
+
+readFile()
+    .then((result) => {
+        console.log('========================== File content read success ==========================')
+        console.log('result', result);
+    })
 
 
-
-app.get('/callback-hell', (req, res) => {
-    const filePath = './NTB_Nepal-Travel-Tips.pdf';
-    const newFilePath = './new.txt';
-    fs.open(newFilePath, 'wx', (err, fd) => {
-        if (err) {
-            throw err;
-        } else {
-            console.log('--------')
-            fs.readFile(filePath, (err, data) => {
-                if (err) {
-                    throw err;
-                } else{
-                    fs.appendFile(filePath, 'data to append', (err) => {
-                        if (err) {
-                            console.log('err', err);
-                            throw err;
-                        } else{
-                            fs.writeFile(newFilePath, data, (err) => {
-                                if (err) {
-                                    throw err;
-                                } else{
-                                    console.log("done")
-                                    res.send('done');
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        }
-    });
-});
-
-
-
-
-
-// checkFileExists((err) => {
-//     seeFilePermissions((err) => {
-//         readFile((err)=> {
-//             appendFile((err) => {
-//                 readFile((err) => {
-//                     writeFile((err) => {
-//                         removeOriginalFile((err) =>{
-//
-//                         })
-//                     })
-//                 })
-//             })
-//         })
-//
-//     })
-// })
+readFile1('./NTB_Nepal-Travel-Tips.pdf')
+    .then((result) => {
+        console.log('========================== File content 1 read success ==========================')
+        console.log('result', result);
+    })
 
 
 app.listen(3000, ()=>{
