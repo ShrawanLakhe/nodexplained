@@ -38,13 +38,6 @@ readFile(fileName)
         console.log('4 - final value ', finalReturnValue);
         throw new Error('Could not process further...');
     })
-    .catch((err) => {
-        console.log('This is minor error, so continue the process to handle other tasks.')
-        return err;
-    })
-    .then((result) => {
-        console.log('error result :: ', result)
-    })
     .catch(onRejected);
 
 

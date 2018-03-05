@@ -21,31 +21,24 @@ const onRejected = (reason) => {
     return reason;
 };
 
+
 app.get('/', (req, res, next) => {
     res.send('Hello');
 });
 
 readFile(fileName)
-    .then(onFulfilled)
+    .then(onFulfilled, onRejected)
     .then((fulfillmentVal) => {
         console.log('2 - Promise fulfillment value ' + fulfillmentVal);
         return readFile('./NTB_Nepal-Travel-Tips.pdf')
-    })
+    }, onRejected)
     .then((pdfContentValue) => {
         console.log('3 - new fulfillment value ', pdfContentValue);
-    })
+    }, onRejected)
     .then((finalReturnValue) => {
         console.log('4 - final value ', finalReturnValue);
         throw new Error('Could not process further...');
-    })
-    .catch((err) => {
-        console.log('This is minor error, so continue the process to handle other tasks.')
-        return err;
-    })
-    .then((result) => {
-        console.log('error result :: ', result)
-    })
-    .catch(onRejected);
+    }, onRejected);
 
 
 app.listen(3009, ()=>{
