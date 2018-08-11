@@ -1,0 +1,3 @@
+# code repository for [**https://www.nodexplained.com/**](https://www.nodexplained.com/)
+# code from following article:
+[**https://www.nodexplained.com/blog-detail/2017/12/16/a-simple-clean-better-and-modular-way-to-handle-routes-in-express-js-using-router-instance**](https://www.nodexplained.com/blog-detail/2017/12/16/a-simple-clean-better-and-modular-way-to-handle-routes-in-express-js-using-router-instance)

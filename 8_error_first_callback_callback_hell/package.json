@@ -1,0 +1,24 @@
+{
+  "name": "express_router",
+  "version": "1.0.0",
+  "description": "An express basic router application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/nodemon server.js"
+  },
+  "keywords": [
+    "express-routes",
+    "routing",
+    "node.js",
+    "express.js"
+  ],
+  "author": "Shrawan Lakhe",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.13.2"
+  }
+}
