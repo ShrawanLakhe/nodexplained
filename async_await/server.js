@@ -28,11 +28,11 @@ funcNumber();
 
 //clean code example
 const checkExistingUserInfo = () => {
-    return Promise.resolve(true);
+    return Promise.resolve(false);
 }
 
 const generateSecuredPassword = () => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         setTimeout(() => {
             resolve("secure_password");
         }, 2000);
